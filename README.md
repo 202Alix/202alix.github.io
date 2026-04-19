@@ -24,4 +24,4 @@ npm run build
 
 ## Deploy
 
-The site is automatically deployed to GitHub Pages via GitHub Actions.
+The site is automatically deployed to GitHub Pages via GitHub Actions.# Regenerate assets to clear cache
