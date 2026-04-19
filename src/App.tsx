@@ -12,7 +12,7 @@ const projects: Project[] = [
   {
     name: 'Tomodachi Dream Image Converter',
     path: '/tlltd-converter',
-    description: 'A tool to upload images and transform them to match the color palette and canvas size of the Tamagotchi drawing game.',
+    description: 'Upload an image and the app will convert it to match the color palette and canvas size of the Tomodachi drawing boards.',
     preview: '🎮'
   },
 ];
