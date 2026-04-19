@@ -1,4 +1,4 @@
-# # Alix - Landing Page
+# Alix - Landing Page
 
 A minimal landing page for 202alix.github.io with links to featured projects.
 
@@ -24,4 +24,4 @@ npm run build
 
 ## Deploy
 
-The site is automatically deployed to GitHub Pages via GitHub Actions.# Regenerate assets to clear cache
+The site is automatically deployed to GitHub Pages via GitHub Actions.
