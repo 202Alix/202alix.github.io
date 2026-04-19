@@ -1,0 +1,154 @@
+import { useState, useEffect } from 'react';
+
+interface Project {
+  name: string;
+  path: string;
+  description: string;
+  preview?: string;
+}
+
+const projects: Project[] = [
+  {
+    name: 'TLLTD Converter',
+    path: '/tlltd-converter',
+    description: 'A simple and intuitive tool for converting images to Tamagotchi-style avatars',
+    preview: '🎮'
+  },
+];
+
+export default function App() {
+  const [hoveredProject, setHoveredProject] = useState<string | null>(null);
+  const [availableProjects, setAvailableProjects] = useState<Project[]>(projects);
+
+  useEffect(() => {
+    // Check for available subdomains dynamically
+    const checkProjects = async () => {
+      const checked: Project[] = [];
+      
+      for (const project of projects) {
+        try {
+          const response = await fetch(project.path);
+          if (response.ok) {
+            checked.push(project);
+          }
+        } catch {
+          // Project not available
+        }
+      }
+      
+      setAvailableProjects(checked.length > 0 ? checked : projects);
+    };
+
+    checkProjects();
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-[#060606] flex flex-col">
+      {/* Navigation Header */}
+      <header className="border-b border-[#fdfefe]/10 py-6 px-4 md:px-8 lg:px-16">
+        <div className="max-w-[1440px] mx-auto flex items-center justify-between">
+          <h1 className="text-2xl font-bold text-white">Alix</h1>
+          <nav className="flex gap-6">
+            <a href="#projects" className="text-[#fdfefe]/70 hover:text-[#fdfefe] transition-colors">
+              Projects
+            </a>
+            <a href="https://github.com/202alix" target="_blank" rel="noopener noreferrer" className="text-[#fdfefe]/70 hover:text-[#fdfefe] transition-colors">
+              GitHub
+            </a>
+          </nav>
+        </div>
+      </header>
+
+      {/* Hero Section */}
+      <section className="flex-1 max-w-[1440px] mx-auto px-4 md:px-8 lg:px-16 py-20 md:py-32 w-full">
+        <div className="max-w-2xl">
+          <h2 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
+            Creative Developer & Designer
+          </h2>
+          <p className="text-xl text-[#fdfefe]/70 mb-8 leading-relaxed">
+            Welcome to my digital space. I create tools, experiments, and interactive experiences with modern web technologies.
+          </p>
+          <div className="flex gap-4 flex-wrap">
+            <a
+              href="#projects"
+              className="px-6 py-3 bg-white text-[#060606] font-medium rounded hover:opacity-90 transition-opacity"
+            >
+              Explore Projects
+            </a>
+            <a
+              href="https://github.com/202alix"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3 border border-[#fdfefe]/30 text-white font-medium rounded hover:border-[#fdfefe] transition-colors"
+            >
+              View on GitHub →
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Projects Section */}
+      <section id="projects" className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-16 py-24 w-full border-t border-[#fdfefe]/10">
+        <div className="mb-16">
+          <div className="flex items-center gap-4 mb-4">
+            <div className="w-8 h-8 border border-[#fdfefe] flex items-center justify-center">
+              <p className="text-sm font-medium text-[#fdfefe]">01</p>
+            </div>
+            <h3 className="text-4xl md:text-5xl font-bold text-white">Projects</h3>
+          </div>
+          <p className="text-lg text-[#fdfefe]/70 ml-12">
+            Explore my latest work and tools
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {availableProjects.map((project) => (
+            <a
+              key={project.path}
+              href={project.path}
+              onMouseEnter={() => setHoveredProject(project.path)}
+              onMouseLeave={() => setHoveredProject(null)}
+              className="group"
+            >
+              <div className="relative p-8 border border-[#fdfefe]/10 rounded-lg hover:border-[#fdfefe]/30 transition-all duration-300 bg-[#0a0a0a] hover:bg-[#141414] cursor-pointer">
+                {/* Preview Icon */}
+                {project.preview && (
+                  <div className="text-5xl mb-4 transition-transform duration-300 group-hover:scale-110">
+                    {project.preview}
+                  </div>
+                )}
+                
+                <h4 className="text-2xl font-bold text-white mb-3 group-hover:text-white/90">
+                  {project.name}
+                </h4>
+                <p className="text-[#fdfefe]/60 text-base leading-relaxed">
+                  {project.description}
+                </p>
+                
+                <div className="mt-6 flex items-center gap-2 text-sm text-[#fdfefe]/50 group-hover:text-[#fdfefe]/70">
+                  <span>Visit Project</span>
+                  <span className="group-hover:translate-x-1 transition-transform">→</span>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+
+        {availableProjects.length === 0 && (
+          <div className="text-center py-12">
+            <p className="text-[#fdfefe]/50 text-lg">Coming soon...</p>
+          </div>
+        )}
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-[#fdfefe]/10 py-12 px-4 md:px-8 lg:px-16">
+        <div className="max-w-[1440px] mx-auto">
+          <p className="text-[#fdfefe]/50 text-sm text-center">
+            © 2025 Alix. Built with React & Tailwind CSS
+          </p>
+        </div>
+      </footer>
+    </div>
+  );
+}
