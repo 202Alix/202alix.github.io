@@ -5,15 +5,15 @@ interface Project {
   name: string;
   path: string;
   description: string;
-  preview?: string;
+  previewImage?: string;
 }
 
 const projects: Project[] = [
   {
-    name: 'Tomodachi Dream Image Converter',
+    name: 'ResizeMe',
     path: '/tlltd-converter',
     description: 'Upload an image and the app will convert it to match the color palette and canvas size of the Tomodachi drawing boards.',
-    preview: '🎮'
+    previewImage: '/Logo_ResizeMe.svg'
   },
 ];
 
@@ -48,15 +48,32 @@ export default function App() {
       <header className="border-b border-[#fdfefe]/10 py-6 px-4 md:px-8 lg:px-16">
         <div className="max-w-[1440px] mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <img src={LogoUrl} alt="202Alix Logo" className="w-8 h-8" />
+            <img src={LogoUrl} alt="202Alix Logo" className="w-10 h-10" />
             <h1 className="text-2xl font-bold text-white">202Alix</h1>
           </div>
-          <nav className="flex gap-6">
+          <nav className="flex items-center gap-6">
             <a href="#projects" className="text-[#fdfefe]/70 hover:text-[#fdfefe] transition-colors">
               Projects
             </a>
             <a href="https://github.com/202alix" target="_blank" rel="noopener noreferrer" className="text-[#fdfefe]/70 hover:text-[#fdfefe] transition-colors">
               GitHub
+            </a>
+            <a
+              href="https://ko-fi.com/L4L51YB9IR"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-block',
+                backgroundColor: '#72a4f2',
+                color: 'white',
+                fontSize: '12px',
+                fontWeight: 'bold',
+                textDecoration: 'none',
+                padding: '8px 12px',
+                borderRadius: '8px'
+              }}
+            >
+              Support me on Ko-fi
             </a>
           </nav>
         </div>
@@ -114,10 +131,12 @@ export default function App() {
               <div className="relative p-8 border border-[#fdfefe]/10 rounded-lg hover:border-[#fdfefe]/30 transition-all duration-300 bg-[#0a0a0a] hover:bg-[#141414]">
                 {/* Preview Icon + Title */}
                 <div className="flex items-center gap-4 mb-6">
-                  {project.preview && (
-                    <div className="text-4xl flex-shrink-0">
-                      {project.preview}
-                    </div>
+                  {project.previewImage && (
+                    <img
+                      src={project.previewImage}
+                      alt={`${project.name} logo`}
+                      className="w-10 h-10 flex-shrink-0 object-contain"
+                    />
                   )}
                   <h4 className="text-xl font-bold text-white">
                     {project.name}
