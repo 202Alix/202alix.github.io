@@ -13,7 +13,7 @@ const projects: Project[] = [
     name: 'ResizeMe',
     path: '/tlltd-converter',
     description: 'Upload an image and the app will convert it to match the color palette and canvas size of the Tomodachi drawing boards.',
-    previewImage: '/Logo_ResizeMe.svg'
+    previewImage: '/ResizeMe%20logo.svg'
   },
 ];
 
